@@ -22,3 +22,11 @@ The numbers will be stored in a file titled **reverse_dataset.txt**
 Run `g++ sorted_generator.cpp -o generate_sorted` followed by `./generate_sorted`.
 
 The numbers will be stored in a file titled **sorted_dataset.txt**
+
+##### Almost Sorted Input
+
+**Note: The approach we used for this was to randomly carry out swaps after sorting the vector. Number of swaps = 0.1 x Number of Total Elements. This way atmost 20% of elements are out of place**
+
+Run `g++ almost_sorted_generator.cpp -o generate_sorted` followed by `./generate_almost_sorted`.
+
+The numbers will be stored in a file titled **almost_sorted_dataset.txt**
