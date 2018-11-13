@@ -13,7 +13,7 @@ int main()
 	ofstream fout;
 	fout.open("random_dataset.txt");
 	long long int j;
-	for(j=0;j<999999;j++)
+	for(j=0;j<1<<17;j++)
 	{
 		i = rand() % 65536;
 		fout<<i<<endl;

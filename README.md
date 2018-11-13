@@ -30,3 +30,13 @@ The numbers will be stored in a file titled **sorted_dataset.txt**
 Run `g++ almost_sorted_generator.cpp -o generate_sorted` followed by `./generate_almost_sorted`.
 
 The numbers will be stored in a file titled **almost_sorted_dataset.txt**
+
+
+## Sorting Algorithms
+
+### Bitonic Sort
+To generate the executable, run 
+```gcc -o bitonic bitonic_sort.c ```
+
+to run the executable, run
+```./bitonic ```
