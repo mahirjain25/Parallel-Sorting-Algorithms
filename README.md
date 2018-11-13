@@ -36,7 +36,22 @@ The numbers will be stored in a file titled **almost_sorted_dataset.txt**
 
 ### Bitonic Sort
 To generate the executable, run 
-```gcc -o bitonic bitonic_sort.c ```
+``` nvcc bitonic_sort.cu ```
 
 to run the executable, run
-```./bitonic ```
+```./a.out ```
+
+### Merge Sort
+To generate the executable, run 
+```nvcc -o mergesort.cu ```
+
+to run the executable, run
+```./a.out ```
+
+### Quick Sort
+**important** - since our QuickSort() implementation uses a recursive function on the device, we need to specify our architecture as *sm_35*
+To generate the executable, run 
+```nvcc -arch=sm_35 -rdc=true quick.cu  ```
+
+to run the executable, run
+```./a.out ```
