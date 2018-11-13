@@ -1,0 +1,12 @@
+#Ignore Executables
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+# Ignore .txt files
+*.txt
