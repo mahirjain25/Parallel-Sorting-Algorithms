@@ -30,3 +30,28 @@ The numbers will be stored in a file titled **sorted_dataset.txt**
 Run `g++ almost_sorted_generator.cpp -o generate_sorted` followed by `./generate_almost_sorted`.
 
 The numbers will be stored in a file titled **almost_sorted_dataset.txt**
+
+
+## Sorting Algorithms
+
+### Bitonic Sort
+To generate the executable, run 
+``` nvcc bitonic_sort.cu ```
+
+to run the executable, run
+```./a.out ```
+
+### Merge Sort
+To generate the executable, run 
+```nvcc -o mergesort.cu ```
+
+to run the executable, run
+```./a.out ```
+
+### Quick Sort
+**important** - since our QuickSort() implementation uses a recursive function on the device, we need to specify our architecture as *sm_35*
+To generate the executable, run 
+```nvcc -arch=sm_35 -rdc=true quick.cu  ```
+
+to run the executable, run
+```./a.out ```
