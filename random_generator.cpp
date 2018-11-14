@@ -5,15 +5,17 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char*argv[])
 {
 	srand(time(NULL));
 	unsigned int i;
+	long long int num;
+	num = (long long int)atoll(argv[1]);
 	printf("%u\n",i);
 	ofstream fout;
 	fout.open("random_dataset.txt");
 	long long int j;
-	for(j=0;j<1<<17;j++)
+	for(j=0;j<num-1;j++)
 	{
 		i = rand() % 65536;
 		fout<<i<<endl;

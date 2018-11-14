@@ -3,19 +3,20 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
 	vector <unsigned int> v;
 	srand(time(NULL));
-	long long int i;
-	for(i=0;i<1000000;i++)
+	long long int i,num;
+	num = (long long int)atoll(argv[1]);
+	for(i=0;i<num;i++)
 	{
 		v.push_back(rand() % 65536);
 	}
 	sort(v.begin(),v.end());
 	ofstream fout;
 	fout.open("sorted_dataset.txt");
-	for(i=0;i<999999;i++)
+	for(i=0;i<num-1;i++)
 	{
 		fout<<v[i]<<endl;
 	}
