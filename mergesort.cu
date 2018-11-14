@@ -149,7 +149,7 @@ int main(int argc, char const *argv[])
 
   long *values = (long*)malloc(NUM_VALS * sizeof(long));
 
-  FILE *f = fopen("random_dataset.txt", "r");
+  FILE *f = fopen("reverse_dataset.txt", "r");
 
   for(int i=0;i< NUM_VALS; i++) {
     fscanf(f, "%d\n", &values[i]);
