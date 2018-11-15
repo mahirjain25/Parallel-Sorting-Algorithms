@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 
-/* Every thread gets exactly one value in the unsorted array. */
+
 #define THREADS 256 // 2^7
 #define BLOCKS 1024 // 2^10
 #define NUM_VALS THREADS*BLOCKS
@@ -82,7 +82,7 @@ __global__ void cdp_simple_quicksort(int *data, int left, int right, int depth )
             rval = *rptr;
         }
 
-        // If the swap points are valid, do the swap!
+        // If the swap points are valid, swap
         if (lptr <= rptr){
             *lptr = rval;
             *rptr = lval;
@@ -91,7 +91,6 @@ __global__ void cdp_simple_quicksort(int *data, int left, int right, int depth )
         }
     }
 
-    // Now the recursive part
     nright = rptr - data;
     nleft  = lptr - data;
 
@@ -111,35 +110,27 @@ __global__ void cdp_simple_quicksort(int *data, int left, int right, int depth )
 }
 
 
-// gcc compiled code will call this function to access CUDA Quick Sort.
-// This calls the kernel, which is recursive. Waits for it, then copies it's
-// output back to CPU readable memory.
-extern "C"
 void gpu_qsort(int *data, int n){
     int* gpuData;
     int left = 0;
     int right = n-1;
 
-    // Prepare CDP for the max depth 'MAX_DEPTH'.
+
     cudaDeviceSetLimit(cudaLimitDevRuntimeSyncDepth, MAX_DEPTH);
 
-    // Allocate GPU memory.
+
     cudaMalloc((void**)&gpuData,n*sizeof(int));
     cudaMemcpy(gpuData,data, n*sizeof(int), cudaMemcpyHostToDevice);
 
-    // Launch on device
+
     cdp_simple_quicksort<<< 1, 1 >>>(gpuData, left, right, 0);
     cudaDeviceSynchronize();
 
-    // Copy back
+
     cudaMemcpy(data,gpuData, n*sizeof(int), cudaMemcpyDeviceToHost);
 
     cudaFree(gpuData);
-    // cudaDeviceReset causes the driver to clean up all state. While
-    // not mandatory in normal operation, it is good practice.  It is also
-    // needed to ensure correct operation when the application is being
-    // profiled. Calling cudaDeviceReset causes all profile data to be
-    // flushed before the application exits
+
     cudaDeviceReset();
 }
 
