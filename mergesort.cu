@@ -3,7 +3,7 @@
 #include <time.h>
 
 
-/* Every thread gets exactly one value in the unsorted array. */
+
 #define THREADS 128 // 2^7
 #define BLOCKS 1024 // 2^10
 #define NUM_VALS THREADS*BLOCKS
@@ -112,29 +112,21 @@ void mergesort(long* data, long size, dim3 threadsPerBlock, dim3 blocksPerGrid) 
     long nThreads = threadsPerBlock.x * threadsPerBlock.y * threadsPerBlock.z *
                     blocksPerGrid.x * blocksPerGrid.y * blocksPerGrid.z;
 
-    //
-    // Slice up the list and give pieces of it to each thread, letting the pieces grow
-    // bigger and bigger until the whole list is sorted
-    //
+
     for (int width = 2; width < (size << 1); width <<= 1) {
         long slices = size / ((nThreads) * width) + 1;
 
-        // Actually call the kernel
+
         gpu_mergesort<<<blocksPerGrid, threadsPerBlock>>>(A, B, size, width, slices, D_threads, D_blocks);
 
-        // Switch the input / output arrays instead of copying them around
         A = A == D_data ? D_swp : D_data;
         B = B == D_data ? D_swp : D_data;
     }
 
-    //
-    // Get the list back from the GPU
-    //
-    tm();
+
     checkCudaErrors(cudaMemcpy(data, A, size * sizeof(long), cudaMemcpyDeviceToHost));
 
     
-    // Free the GPU memory
     checkCudaErrors(cudaFree(A));
     checkCudaErrors(cudaFree(B));
    

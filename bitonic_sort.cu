@@ -77,12 +77,9 @@ int main(int argc, char const *argv[])
     fscanf(f, "%d\n", &values[i]);
   }
 
-  printf("Hello\n");
+
   start  = clock();
   bitonic_sort(values);
-  for(int i=0; i < 20 ;i ++) {
-    printf("%d\n", values[i]);
-  }
   stop = clock();
 
   print_elapsed(start, stop);
